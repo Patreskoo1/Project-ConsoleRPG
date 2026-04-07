@@ -28,17 +28,17 @@ bool IsYes(string? input)
     return normalized is "yes" or "ano";
 }
 
-// Nahodne vyberie typ nepriatela pre dalsi suboj. Dokoncene.
-Enemy CreateRandomEnemy(Random rng)
+// Vyberie Enemy y lokacie, s ktorou sa hrac stretne. Dokoncene.
+Enemy RandomEnemy(Location location, Random rng)
 {
-    return rng.Next(0, 4) switch
+    if (location.EnemyTypes.Count == 0)
     {
-        0 => new Goblin(),
-        1 => new Skeleton(),
-        2 => new Zombie(),
-        _ => new HumanBandit(),
-    };
+        throw new InvalidOperationException("Location has no enemy types defined.");
+    }
+    int index = rng.Next(location.EnemyTypes.Count);
+    return location.EnemyTypes[index]();
 }
+
 
 // Nahodne vygeneruje predmet (loot), ktory moze padnut po boji. Dokoncene.
 Item GenerateRandomItem(Random rng)

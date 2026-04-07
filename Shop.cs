@@ -1,5 +1,4 @@
-﻿using Project_RPG;
-
+﻿
 public static class Shop
 {
     private static readonly List<Item> ShopItems = new List<Item>

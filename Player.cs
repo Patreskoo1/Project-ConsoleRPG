@@ -1,5 +1,4 @@
-﻿using Project_RPG;
-
+﻿
 public class Player : Character
 {
     public Item? EquippedWeapon { get; set; }
@@ -139,7 +138,4 @@ public class UseItemManager
         Console.WriteLine($"You used: {item.Name} and restored {item.Value} health!");
     }
 }
-
-
-
 
