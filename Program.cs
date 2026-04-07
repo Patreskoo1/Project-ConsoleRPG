@@ -70,7 +70,7 @@ void RunAdventure(Player currentPlayer, Random rng)
     while (currentPlayer.Health > 0)
     {
         Console.WriteLine("You encounter a wild enemy!");
-        Enemy currentEnemy = CreateRandomEnemy(rng);
+        Enemy currentEnemy = RandomEnemy(new ForgottenGrove(), rng);
 
         Console.WriteLine("Do you wish to fight the enemy? (yes/no)");
         if (!IsYes(Console.ReadLine()))
