@@ -1,5 +1,4 @@
-﻿using Project_RPG;
-
+﻿
 public class ForgottenGrove : Location
 {
     public ForgottenGrove() : base("A dense forest covered in mist where travelers often lose their way. The silence is broken only by strange rustling sounds.")

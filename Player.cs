@@ -1,5 +1,4 @@
-﻿using Project_RPG;
-
+﻿
 public class Player : Character
 {
     public Item? EquippedWeapon { get; set; }
@@ -137,34 +136,6 @@ public class UseItemManager
         player.Inventory.Remove(item);
         player.Health = Math.Min(player.Health + item.Value, 100 + (player.Level - 1) * 20);
         Console.WriteLine($"You used: {item.Name} and restored {item.Value} health!");
-    }
-}
-
-// Zobrazi inventar a necha hraca vybrat item na equipnutie.
-void TryEquipItemFromInventory(Player currentPlayer)
-{
-    if (currentPlayer.Inventory.Count == 0)
-    {
-        Console.WriteLine("Your inventory is empty.");
-        return;
-    }
-
-    Console.WriteLine("Your Inventory:");
-    for (int i = 0; i < currentPlayer.Inventory.Count; i++)
-    {
-        var it = currentPlayer.Inventory[i];
-        Console.WriteLine($"{i + 1}. {it.Name} (Type: {it.Type}, Value: {it.Value})");
-    }
-
-    Console.WriteLine("Enter the number of the item to equip (or 0 to cancel):");
-    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 1 && choice <= currentPlayer.Inventory.Count)
-    {
-        EquipmentManager equipManager = new EquipmentManager();
-        equipManager.EquipItem(currentPlayer, currentPlayer.Inventory[choice - 1]);
-    }
-    else
-    {
-        Console.WriteLine("Cancelled.");
     }
 }
 
