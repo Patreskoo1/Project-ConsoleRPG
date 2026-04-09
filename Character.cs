@@ -36,9 +36,20 @@
         return Math.Max(0, damage);
     }
 
-    public bool GenerateRandomItemDrop(Random random)
+    public Item? GenerateRandomItemDrop(Random random, Location currentLocation)
     {
-        return random.Next(0, 100) < ItemDropChance;
+        if (random.Next(0, 100) >= ItemDropChance)
+        {
+
+            return null;
+        }
+
+        if (currentLocation.Items == null || currentLocation.Items.Count == 0)
+        {
+            return null;
+        }
+
+        return currentLocation.Items[random.Next(currentLocation.Items.Count)];
     }
 
 }
