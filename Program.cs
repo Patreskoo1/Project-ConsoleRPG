@@ -40,17 +40,6 @@ Enemy RandomEnemy(Location location, Random rng)
 }
 
 
-// Nahodne vygeneruje predmet (loot), ktory moze padnut po boji. Dokoncene.
-Item GenerateRandomItem(Random rng)
-{
-    return rng.Next(0, 4) switch
-    {
-        0 => new Item { Name = "Small Health Potion", Type = ItemType.Consumable, Value = 30, Price = 15 },
-        1 => new Item { Name = "Iron Sword", Type = ItemType.Weapon, Value = 8, Price = 45 },
-        2 => new Item { Name = "Leather Armor", Type = ItemType.Armor, Value = 6, Price = 40 },
-        _ => new Item { Name = "Lucky Ring", Type = ItemType.Accessory, Value = 4, Price = 60 },
-    };
-}
 
 // Vypise aktualne statistiky hraca na konzolu. Dokoncene.
 void PrintPlayerStats(Player currentPlayer)
@@ -70,7 +59,8 @@ void RunAdventure(Player currentPlayer, Random rng)
     while (currentPlayer.Health > 0)
     {
         Console.WriteLine("You encounter a wild enemy!");
-        Enemy currentEnemy = CreateRandomEnemy(rng);
+        Location currentLocation = new LocationSelector().SelectLocation(new LocationManager(), currentPlayer) ?? new ForgottenGrove();
+        Enemy currentEnemy = RandomEnemy(new ForgottenGrove(), rng);
 
         Console.WriteLine("Do you wish to fight the enemy? (yes/no)");
         if (!IsYes(Console.ReadLine()))
@@ -80,7 +70,7 @@ void RunAdventure(Player currentPlayer, Random rng)
         }
 
         Console.WriteLine("You engage in battle!");
-        BattleResult result = RunBattle(currentPlayer, currentEnemy, rng);
+        BattleResult result = RunBattle(currentPlayer, currentEnemy, rng, currentLocation);
 
         if (result is BattleResult.PlayerDefeated or BattleResult.PlayerRanAway)
         {
@@ -96,7 +86,7 @@ void RunAdventure(Player currentPlayer, Random rng)
 }
 
 // Spracuje cely boj medzi hracom a jednym nepriatelom. Dokoncene.
-BattleResult RunBattle(Player currentPlayer, Enemy currentEnemy, Random rng)
+BattleResult RunBattle(Player currentPlayer, Enemy currentEnemy, Random rng, Location currentLocation)
 {
     while (currentPlayer.Health > 0 && currentEnemy.Health > 0)
     {
@@ -108,7 +98,7 @@ BattleResult RunBattle(Player currentPlayer, Enemy currentEnemy, Random rng)
 
         if (currentEnemy.Health <= 0)
         {
-            HandleEnemyDefeat(currentPlayer, currentEnemy, rng);
+            HandleEnemyDefeat(currentPlayer, currentEnemy, rng, currentLocation);
             return BattleResult.EnemyDefeated;
         }
 
@@ -165,15 +155,15 @@ bool ResolveEnemyAttack(Player currentPlayer, Enemy currentEnemy, Random rng)
 }
 
 // Prideli odmeny za porazenie nepriatela (XP + zlato). Dokoncene.
-void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng)
+void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng, Location currentLocation)
 {
     currentEnemy.Health = 0;
     Console.WriteLine($"You have defeated the {currentEnemy.Name}!");
     currentPlayer.Experience += currentEnemy.XpReward;
     currentPlayer.Gold += currentEnemy.GoldReward;
-    if (currentEnemy.GenerateRandomItemDrop(rng))
+    if (currentEnemy.GenerateRandomItemDrop(rng, currentLocation))
     {
-        Item droppedItem = GenerateRandomItem(rng);
+        Item droppedItem = currentLocation.Items[rng.Next(currentLocation.Items.Count)];
         currentPlayer.AddItemToInventory(droppedItem);
     }
     Console.WriteLine($"You gain {currentEnemy.XpReward} XP and {currentEnemy.GoldReward} gold.");
