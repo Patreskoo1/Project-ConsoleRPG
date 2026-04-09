@@ -60,7 +60,7 @@ void RunAdventure(Player currentPlayer, Random rng)
     {
         Console.WriteLine("You encounter a wild enemy!");
         Location currentLocation = new LocationSelector().SelectLocation(new LocationManager(), currentPlayer) ?? new ForgottenGrove();
-        Enemy currentEnemy = RandomEnemy(new ForgottenGrove(), rng);
+        Enemy currentEnemy = RandomEnemy(currentLocation, rng);
 
         Console.WriteLine("Do you wish to fight the enemy? (yes/no)");
         if (!IsYes(Console.ReadLine()))
@@ -161,11 +161,13 @@ void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng, Loc
     Console.WriteLine($"You have defeated the {currentEnemy.Name}!");
     currentPlayer.Experience += currentEnemy.XpReward;
     currentPlayer.Gold += currentEnemy.GoldReward;
-    if (currentEnemy.GenerateRandomItemDrop(rng, currentLocation))
-    {
-        Item droppedItem = currentLocation.Items[rng.Next(currentLocation.Items.Count)];
-        currentPlayer.AddItemToInventory(droppedItem);
-    }
+        Item? droppedItem = currentEnemy.GenerateRandomItemDrop(rng, currentLocation);
+        if (droppedItem != null)
+        {
+            currentPlayer.AddItemToInventory(droppedItem);
+            Console.WriteLine($"The {currentEnemy.Name} dropped an item: {droppedItem.Name}!");
+        }
+
     Console.WriteLine($"You gain {currentEnemy.XpReward} XP and {currentEnemy.GoldReward} gold.");
     Console.WriteLine($"Your current XP: {currentPlayer.Experience}, Gold: {currentPlayer.Gold}");
     if (currentPlayer.Experience >= currentPlayer.Level * 50)
