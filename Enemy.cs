@@ -19,5 +19,6 @@
         AttackPower = attackPower;
         Defense = defense;
         CriticalChance = 5;
+        
     }
 }
