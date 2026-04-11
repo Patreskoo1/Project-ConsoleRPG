@@ -5,7 +5,7 @@ public class Player : Character
     public Item? EquippedArmor { get; set; }
     public Item? EquippedAccessory { get; set; }
     public int Experience { get; set; } = 0;
-    public int Gold { get; set; } = 0;
+    public int Gold { get; set; } = 0; 
 
     // Nastavi zakladne staty hraca na zaciatku hry. Dokoncene.
     public Player()

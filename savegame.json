@@ -1,0 +1,22 @@
+{
+  "Name": "fas",
+  "Level": 2,
+  "Health": 120,
+  "Experience": 0,
+  "Gold": 20,
+  "AttackPower": 30,
+  "Defense": 7,
+  "CriticalChance": 12,
+  "Inventory": [
+    {
+      "Name": "Leather Armor",
+      "Description": "Basic armor made of leather. Provides minimal protection.",
+      "Type": 1,
+      "Value": 3,
+      "Price": 15
+    }
+  ],
+  "EquippedWeapon": null,
+  "EquippedArmor": null,
+  "EquippedAccessory": null
+}

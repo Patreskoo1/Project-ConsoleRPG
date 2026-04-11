@@ -4,11 +4,32 @@ using System.Linq;
 int enemiesDefeated = 0;
 
 Console.WriteLine("Hello, dear traveler!");
-Console.WriteLine("What is your name?");
-string name = Console.ReadLine() ?? "Traveler";
-Console.WriteLine($"Welcome, {name}! Your adventure begins now.");
+Console.WriteLine("1. Start a new adventure");
+Console.WriteLine("2. Load saved adventure");
+string choice = Console.ReadLine()?.Trim() ?? "1";
+Player? player;
 
-Player player = new Player { Name = name };
+if (choice == "2")
+{
+	player = GameStateManager.LoadGame();
+	if (player == null)
+	{
+		Console.WriteLine("Starting a new adventure instead.");
+		Console.Write("What is your name, adventurer? ");
+		string name = Console.ReadLine()?.Trim() ?? "Adventurer";
+		player = new Player { Name = name };
+	}
+}
+else
+{
+	Console.Write("What is your name, adventurer? ");
+	string name = Console.ReadLine()?.Trim() ?? "Adventurer";
+	player = new Player { Name = name };
+}
+
+Console.WriteLine($"Welcome, {player.Name}! Your adventure begins now.");
+
+
 Random random = new Random();
 
 Console.WriteLine("Do you wish to look at your stats? (yes/no)");
@@ -210,7 +231,7 @@ void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng, Loc
 			Enemy Boss = GetBossForLocation(currentLocation);
             Console.WriteLine($"You have chosen to fight the boss: {Boss.Name}!");
 			Console.WriteLine($"{Boss.Description}");
-			BattleResult bossResult = RunBattle(currentPlayer,new Enemy { Name = Boss.Name, Description = Boss.Description, Health = Boss.Health, AttackPower = Boss.AttackPower, Defense = Boss.Defense, CriticalChance = Boss.CriticalChance, XpReward = 100, GoldReward = 200 }, rng, currentLocation);
+			BattleResult bossResult = RunBattle(currentPlayer, Boss , rng , currentLocation);
 
             if (bossResult == BattleResult.EnemyDefeated)
 			{
@@ -243,8 +264,10 @@ void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng, Loc
 		Console.WriteLine("3. Check your inventory");
 		Console.WriteLine("4. Equip an item");
 		Console.WriteLine("5. Use a health potion");
-		Console.WriteLine("6. Quit the adventure");
-		Console.WriteLine("7. DEBUG: Give gold, potion, weapon");
+		Console.WriteLine("6. Continue exploring the location");
+		Console.WriteLine("7. Quit the adventure");
+		Console.WriteLine("8. DEBUG: Give gold, potion, weapon");
+		Console.WriteLine("9. Save and quit.");
 
 		string response = (Console.ReadLine() ?? "3").Trim();
 		if (response == "1")
@@ -284,16 +307,28 @@ void HandleEnemyDefeat(Player currentPlayer, Enemy currentEnemy, Random rng, Loc
 
 		if (response == "6")
 		{
+			Console.WriteLine("You continue exploring the location, looking for more enemies to fight and treasures to find. Good luck, traveler!");
+			return true;
+		}
+
+        if (response == "7")
+		{
 			return false;
 		}
 
-		if (response == "7")
+		if (response == "8")
 		{
 			currentPlayer.Gold += 500;
 			currentPlayer.Inventory.Add(new Item { Name = "Debug Sword", Type = ItemType.Weapon, Value = 99, Price = 1 });
 			currentPlayer.Inventory.Add(new Item { Name = "Debug Potion", Type = ItemType.Consumable, Value = 100, Price = 1 });
 			Console.WriteLine("DEBUG: Added 500 gold, Debug Sword, Debug Potion.");
 			return true;
+		}
+		if (response == "9")
+		{
+			GameStateManager.SaveGame(currentPlayer);
+			Console.WriteLine("Game saved. Goodbye, traveler!");
+			return false;
 		}
 
 		Console.WriteLine("Invalid choice. Please try again.");

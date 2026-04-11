@@ -12,3 +12,4 @@ C:\Users\Termi\source\repos\Project-RPG\Project-RPG\obj\Debug\net10.0\refint\Pro
 C:\Users\Termi\source\repos\Project-RPG\Project-RPG\obj\Debug\net10.0\Project-RPG.pdb
 C:\Users\Termi\source\repos\Project-RPG\Project-RPG\obj\Debug\net10.0\Project-RPG.genruntimeconfig.cache
 C:\Users\Termi\source\repos\Project-RPG\Project-RPG\obj\Debug\net10.0\ref\Project-RPG.dll
+C:\Users\Termi\source\repos\Project-RPG\Project-RPG\obj\Debug\net10.0\Project-RPG.sourcelink.json
