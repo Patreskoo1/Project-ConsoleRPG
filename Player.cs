@@ -17,11 +17,11 @@ public class Player : Character
 
         BasePlayer classInstance = PlayerClass switch
         {
-            PlayerClass.Warrior => new Warrior(),
-            PlayerClass.Mage => new Mage(),
+            PlayerClass.Warrior => new Soldier(),
+            PlayerClass.Mage => new Scholar(),
             PlayerClass.Rogue => new Rogue(),
             PlayerClass.Archer => new Archer(),
-            _ => new Warrior()
+            _ => new Soldier()
         };
 
         var stats = classInstance.BaseStats;
