@@ -1,11 +1,38 @@
 ﻿
 public class Player : Character
 {
+    public PlayerClass SelectedClass { get; set; }
+    public int Mana { get; set; }
+    public int MaxMana { get; set; }
+    public List<Ability> Abilities { get; set; } = new List<Ability>();
     public Item? EquippedWeapon { get; set; }
     public Item? EquippedArmor { get; set; }
     public Item? EquippedAccessory { get; set; }
     public int Experience { get; set; } = 0;
-    public int Gold { get; set; } = 0; 
+    public int Gold { get; set; } = 0;
+
+    public void SetPlayerClass(PlayerClass playerClass)
+    {
+        SelectedClass = playerClass;
+
+        BasePlayer classInstance = PlayerClass switch
+        {
+            PlayerClass.Warrior => new Warrior(),
+            PlayerClass.Mage => new Mage(),
+            PlayerClass.Rogue => new Rogue(),
+            PlayerClass.Archer => new Archer(),
+            _ => new Warrior()
+        };
+
+        var stats = classInstance.BaseStats;
+        Strenght = stats.Strength;
+        Intelligence = stats.Intelligence;
+        Endurance = stats.Endurance;
+        Agility = stats.Agility;
+        Luck = stats.Luck;
+        Abilities = classInstance.StartingAbilities;
+        Mana = MaxMana = 50 + (Intelligence * 5);
+    }
 
     // Nastavi zakladne staty hraca na zaciatku hry. Dokoncene.
     public Player()
@@ -40,7 +67,6 @@ public class Player : Character
         }
     }
 }
-
 
 public class PlayerLevelUp
 {

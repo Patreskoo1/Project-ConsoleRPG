@@ -4,9 +4,11 @@
     public string? Description { get; set; }
     public int Health { get; set; } = 100;
     public int Level { get; set; } = 1;
-    public int AttackPower { get; set; } = 10;
-    public int Defense { get; set; } = 5;
-    public int CriticalChance { get; set; } = 5;
+    public int Strenght { get; set; }
+    public int Intelligence { get; set; }
+    public int Agility { get; set; }
+    public int Endurance { get; set; }
+    public int Luck { get; set; }
     public double CriticalMultiplier { get; set; } = 1.5;
     public int ItemDropChance { get; set; } = 30;
    
