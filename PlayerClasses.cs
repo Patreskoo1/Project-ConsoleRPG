@@ -1,7 +1,7 @@
 ﻿public enum PlayerClass
 {
-    Warrior,
-    Mage,
+    Soldier,
+    Scholar,
     Rogue,
     Archer,
 }
@@ -33,9 +33,9 @@ public class PlayerStats
 }
 
 
-public class Warrior : BasePlayer
+public class Soldier : BasePlayer
 {
-    public override string Name => "Warrior";
+    public override string Name => "Soldier";
     public override string Description => "A strong and resilient fighter, excelling in melee combat.";
     public override PlayerStats BaseStats => new PlayerStats(strength: 10, intelligence: 3, agility: 5, endurance: 8, luck: 2);
     public override List<Ability> StartingAbilities => new List<Ability>
@@ -46,9 +46,9 @@ public class Warrior : BasePlayer
     };
 }
 
-public class Mage : BasePlayer
+public class Scholar : BasePlayer
 {
-    public override string Name => "Mage";
+    public override string Name => "Scholar";
     public override string Description => "A master of arcane arts, capable of casting powerful spells.";
     public override PlayerStats BaseStats => new PlayerStats(strength: 3, intelligence: 10, agility: 5, endurance: 4, luck: 5);
     public override List<Ability> StartingAbilities => new List<Ability>

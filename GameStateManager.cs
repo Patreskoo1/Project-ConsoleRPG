@@ -91,5 +91,30 @@ public static class GameStateManager
             return null;
         }
     }
+
+    public static void DeleteSaveFile()
+    {
+        try
+        {
+            if (File.Exists("savegame.json"))
+            {
+                File.Delete("savegame.json");
+                Console.WriteLine("Save file deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("No save file to delete.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting save file: {ex.Message}");
+        }
+    }
+
+    public static bool SaveFileExists()
+    {
+        return File.Exists("savegame.json");
+    }
 }
 
