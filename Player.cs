@@ -15,10 +15,10 @@ public class Player : Character
     {
         SelectedClass = playerClass;
 
-        BasePlayer classInstance = PlayerClass switch
+        BasePlayer classInstance = playerClass switch
         {
-            PlayerClass.Warrior => new Soldier(),
-            PlayerClass.Mage => new Scholar(),
+            PlayerClass.Soldier => new Soldier(),
+            PlayerClass.Scholar => new Scholar(),
             PlayerClass.Rogue => new Rogue(),
             PlayerClass.Archer => new Archer(),
             _ => new Soldier()
