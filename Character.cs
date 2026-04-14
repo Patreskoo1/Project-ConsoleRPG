@@ -2,6 +2,9 @@
 {
     public string? Name { get; set; }
     public string? Description { get; set; }
+    public int AttackPower { get; set; }
+    public int Defense { get; set; }
+    public int CriticalChance { get; set; }
     public int Health { get; set; } = 100;
     public int Level { get; set; } = 1;
     public int Strenght { get; set; }

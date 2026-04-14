@@ -9,8 +9,8 @@
 
 public class Ability
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
     public int ManaCost { get; set; }
     public int Damage { get; set; }
     public int Healing { get; set; }

@@ -3,7 +3,7 @@ using System.Threading;
 
 public static class StoryText
 {
-    static void WriteWithDelay(string text, int delayMs = 30)
+    public static void WriteWithDelay(string text, int delayMs = 30)
     {
         foreach (char c in text)
         {
@@ -12,28 +12,71 @@ public static class StoryText
         }
     }
 
-    static void WriteLineWithDelay(string text, int delayMs = 30)
+    public static void WriteLineWithDelay(string text, int delayMs = 30)
     {
         WriteWithDelay(text + Environment.NewLine, delayMs);
         Console.WriteLine();
     }
 
-    static void WriteColored(string text, ConsoleColor color, int delayMs = 30)
+    public static void WriteColored(string text, ConsoleColor color, int delayMs = 30)
     {
         Console.ForegroundColor = color;
         WriteWithDelay(text, delayMs);
         Console.ResetColor();
     }
 
-    static void WriteLineColored(string text, ConsoleColor color, int delayMs = 30)
+    public static void WriteLineColored(string text, ConsoleColor color, int delayMs = 30)
     {
         WriteColored(text + Environment.NewLine, color, delayMs);
         Console.WriteLine();
     }
 
+    public static void DisplayTitleScreen()
+    {
+        Console.Clear();
+        WriteLineColored(@"
+    ╔══════════════════════════════════════╗
+    ║          CONSOLE RPG ADVENTURE       ║
+    ║              ~ Welcome ~             ║
+    ╚══════════════════════════════════════╝
+    ", ConsoleColor.Cyan, 20);
+    }
+
+    public static void ShowLoadingBar(string message)
+    {
+        Console.WriteLine(message);
+        WriteColored("[", ConsoleColor.White);
+        for (int i = 0; i < 20; i++)
+        {
+            WriteColored("█", ConsoleColor.Green);
+            Thread.Sleep(150);
+        }
+        WriteColored("] Complete!", ConsoleColor.White);
+        Console.WriteLine();
+    }
+
+    public static string GetColorInput(string prompt, ConsoleColor promotColor = ConsoleColor.Green)
+    {
+        WriteColored(prompt, promotColor);
+        return Console.ReadLine() ?? "";
+    }
+
+    public static void DisplayDamage(int damage, bool isCritical = false)
+    {
+        if (isCritical)
+        {
+            WriteLineColored($"💥 CRITICAL HIT! {damage} damage! 💥", ConsoleColor.Red, 15);
+        }
+        else
+        {
+            WriteLineColored($"⚔️ {damage} damage dealt!", ConsoleColor.Yellow, 25);
+        }
+    }
+
     public static void ShowTavernIntro()
     {
         Console.Clear();
+        ShowLoadingBar("Loading story...");
 
         WriteLineWithDelay("The year is 1347.", 40);
         WriteLineWithDelay("The war ended three years ago.", 40);
@@ -82,10 +125,11 @@ public static class StoryText
 
         WriteLineColored("Press any key to rise from your seat...", ConsoleColor.White, 20);
         Console.ReadKey(true);
+        
     }
 
-    public static void ShowClassSelection()
-    { 
+    public static Player ShowClassSelection()
+    {
         Console.Clear();
 
         WriteLineColored("The barkeeper eyes you from across the room.", ConsoleColor.DarkGray, 35);
@@ -94,9 +138,9 @@ public static class StoryText
         Thread.Sleep(600);
         Console.WriteLine();
 
-        WriteLineColored("He slides a drink across the bar.", ConsoleColor.Gray, 35);
+        WriteLineColored("He slides a drink across the bar.", ConsoleColor.DarkGray, 35);
         Thread.Sleep(400);
-        WriteLineColored("\"So. What do they call you?\"", ConsoleColor.Gray, 35);
+        WriteLineColored("\"So. What do they call you?\"", ConsoleColor.DarkGray, 35);
         Thread.Sleep(400);
         Console.WriteLine();
 
@@ -138,16 +182,28 @@ public static class StoryText
 
         WriteLineColored("Your choice: ", ConsoleColor.White, 20);
 
-            PlayerClass selectedClass = playerClass switch
-            {
-                "SOLDIER" => PlayerClass.Soldier,
-                "ROGUE" => PlayerClass.Rogue,
-                "SCHOLAR" => PlayerClass.Scholar,
-                "ARCHER" => PlayerClass.Archer,
-                _ => PlayerClass.Soldier
-            };
+        string playerClass = "";
+        while (true)
+        {
+            var key = Console.ReadKey(true).KeyChar;
+            if (key == '1') { playerClass = "SOLDIER"; break; }
+            if (key == '2') { playerClass = "ROGUE"; break; }
+            if (key == '3') { playerClass = "SCHOLAR"; break; }
+            if (key == '4') { playerClass = "ARCHER"; break; }
+        }
 
-        Player.SetPlayerClass(selectedClass);
+        Player player = new Player { Name = playerName };
+        PlayerClass selectedClass = playerClass switch
+        {
+            "SOLDIER" => PlayerClass.Soldier,
+            "ROGUE" => PlayerClass.Rogue,
+            "SCHOLAR" => PlayerClass.Scholar,
+            "ARCHER" => PlayerClass.Archer,
+            _ => PlayerClass.Soldier
+        };
+        
+        player.SetPlayerClass(selectedClass);
+       
 
         Console.WriteLine();
         Thread.Sleep(400);
@@ -162,4 +218,7 @@ public static class StoryText
         Console.WriteLine();
         WriteLineColored("Press any key to step outside...", ConsoleColor.White, 20);
         Console.ReadKey(true);
+
+        return player;
+    }
 }
