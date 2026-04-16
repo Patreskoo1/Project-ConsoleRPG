@@ -14,6 +14,9 @@ public class Ability
     public int ManaCost { get; set; }
     public int Damage { get; set; }
     public int Healing { get; set; }
+    public int BuffAmount { get; set; }
+    public int BuffDuration { get; set; }
+    public string? BuffStat { get; set; }
     public AbilityType Type { get; set; }
     public int Cooldown { get; set; }
 }

@@ -8,4 +8,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="ProgramOld.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Shop.cs" />
+  </ItemGroup>
+
 </Project>

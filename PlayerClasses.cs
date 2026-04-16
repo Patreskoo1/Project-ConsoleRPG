@@ -20,7 +20,6 @@ public class PlayerStats
     public int Intelligence { get; set; }
     public int Agility { get; set; }
     public int Endurance { get; set; }
-    public int CriticalChance { get; set; }
     public int Luck { get; set; }
     public PlayerStats(int strength, int intelligence, int agility, int endurance, int luck)
     {
@@ -40,9 +39,9 @@ public class Soldier : BasePlayer
     public override PlayerStats BaseStats => new PlayerStats(strength: 10, intelligence: 3, agility: 5, endurance: 8, luck: 2);
     public override List<Ability> StartingAbilities => new List<Ability>
     {
-        new Ability { Name = "Slash", Description = "A powerful melee attack.", ManaCost = 0, Damage = 15, Type = AbilityType.Attack },
-        new Ability { Name = "Shield Block", Description = "Reduces incoming damage for a short time.", ManaCost = 5, Type = AbilityType.Buff },
-        new Ability { Name = "War Cry", Description = "Increases attack power for a short time.", ManaCost = 10, Type = AbilityType.Buff }
+        new Ability { Name = "Slash", Description = "A powerful melee attack.", ManaCost = 0, Damage = 15, Type = AbilityType.Attack, Cooldown = 1 },
+        new Ability { Name = "Shield Block", Description = "Reduces incoming damage for a short time.", ManaCost = 5, Type = AbilityType.Buff, BuffAmount = 8, BuffDuration = 2, BuffStat = "Endurance", Cooldown = 3 },
+        new Ability { Name = "War Cry", Description = "Increases attack power for a short time.", ManaCost = 10, Type = AbilityType.Buff, BuffAmount = 6, BuffDuration = 2, BuffStat = "Strength", Cooldown = 4 }
     };
 }
 
@@ -53,9 +52,9 @@ public class Scholar : BasePlayer
     public override PlayerStats BaseStats => new PlayerStats(strength: 3, intelligence: 10, agility: 5, endurance: 4, luck: 5);
     public override List<Ability> StartingAbilities => new List<Ability>
     {
-        new Ability { Name = "Fireball", Description = "A fiery projectile that damages enemies.", ManaCost = 10, Damage = 20, Type = AbilityType.Attack },
-        new Ability { Name = "Ice Shield", Description = "Creates a shield of ice that absorbs damage.", ManaCost = 8, Type = AbilityType.Buff },
-        new Ability { Name = "Arcane Blast", Description = "A burst of arcane energy that damages and stuns enemies.", ManaCost = 12, Damage = 25, Type = AbilityType.Attack }
+        new Ability { Name = "Fireball", Description = "A fiery projectile that damages enemies.", ManaCost = 10, Damage = 20, Type = AbilityType.Attack, Cooldown = 1 },
+        new Ability { Name = "Ice Shield", Description = "Creates a shield of ice that absorbs damage.", ManaCost = 8, Type = AbilityType.Buff, BuffAmount = 10, BuffDuration = 2, BuffStat = "Endurance", Cooldown = 3 },
+        new Ability { Name = "Arcane Blast", Description = "A burst of arcane energy that damages and stuns enemies.", ManaCost = 12, Damage = 25, Type = AbilityType.Attack, Cooldown = 2 }
     };
 }
 
@@ -66,9 +65,9 @@ public class Rogue : BasePlayer
     public override PlayerStats BaseStats => new PlayerStats(strength: 5, intelligence: 4, agility: 10, endurance: 4, luck: 4);
     public override List<Ability> StartingAbilities => new List<Ability>
     {
-        new Ability { Name = "Backstab", Description = "A powerful attack that deals extra damage when hitting from behind.", ManaCost = 0, Damage = 20, Type = AbilityType.Attack },
-        new Ability { Name = "Smoke Bomb", Description = "Creates a cloud of smoke that increases evasion for a short time.", ManaCost = 5, Type = AbilityType.Buff },
-        new Ability { Name = "Poison Dagger", Description = "A dagger coated with poison that damages enemies over time.", ManaCost = 8, Damage = 10, Type = AbilityType.Attack }
+        new Ability { Name = "Backstab", Description = "A powerful attack that deals extra damage when hitting from behind.", ManaCost = 0, Damage = 20, Type = AbilityType.Attack, Cooldown = 1 },
+        new Ability { Name = "Smoke Bomb", Description = "Creates a cloud of smoke that increases evasion for a short time.", ManaCost = 5, Type = AbilityType.Buff, BuffAmount = 10, BuffDuration = 2, BuffStat = "Agility", Cooldown = 3 },
+        new Ability { Name = "Poison Dagger", Description = "A dagger coated with poison that damages enemies over time.", ManaCost = 8, Damage = 10, Type = AbilityType.Attack, Cooldown = 2 }
     };
 }
 
@@ -79,8 +78,8 @@ public class Archer : BasePlayer
     public override PlayerStats BaseStats => new PlayerStats(strength: 4, intelligence: 5, agility: 8, endurance: 5, luck: 3);
     public override List<Ability> StartingAbilities => new List<Ability>
     {
-        new Ability { Name = "Arrow Shot", Description = "A basic ranged attack.", ManaCost = 0, Damage = 15, Type = AbilityType.Attack },
-        new Ability { Name = "Eagle Eye", Description = "Increases accuracy and critical chance for a short time.", ManaCost = 5, Type = AbilityType.Buff },
-        new Ability { Name = "Multi-Shot", Description = "Fires multiple arrows at once, hitting multiple enemies.", ManaCost = 10, Damage = 10, Type = AbilityType.Attack }
+        new Ability { Name = "Arrow Shot", Description = "A basic ranged attack.", ManaCost = 0, Damage = 15, Type = AbilityType.Attack, Cooldown = 1 },
+        new Ability { Name = "Eagle Eye", Description = "Increases accuracy and critical chance for a short time.", ManaCost = 5, Type = AbilityType.Buff, BuffAmount = 8, BuffDuration = 2, BuffStat = "Luck", Cooldown = 3 },
+        new Ability { Name = "Multi-Shot", Description = "Fires multiple arrows at once, hitting multiple enemies.", ManaCost = 10, Damage = 10, Type = AbilityType.Attack, Cooldown = 2 }
     };
 }
