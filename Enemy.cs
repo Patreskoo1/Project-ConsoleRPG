@@ -3,22 +3,17 @@
     public int XpReward { get; set; } = 25;
     public int GoldReward { get; set; } = 10;
 
-    // Nastavi zakladne staty nepriatela. Dokoncene.
-    public Enemy()
-    {
-        Health = 50;
-        AttackPower = 15;
-        Defense = 5;
-        CriticalChance = 5;
-    }
-
-    public Enemy(string name, int health, int attackPower, int defense)
+    
+    public Enemy(string name, int health, int strength, int endurance, int agility, int luck,int level = 1)
     {
         Name = name;
+        MaxHealth = health;
         Health = health;
-        AttackPower = attackPower;
-        Defense = defense;
-        CriticalChance = 5;
+        Strength = strength;
+        Endurance = endurance;
+        Agility = agility;
+        Luck = luck;
+        Level = level;
         
     }
 }

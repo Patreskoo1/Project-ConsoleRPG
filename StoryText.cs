@@ -221,4 +221,50 @@ public static class StoryText
 
         return player;
     }
+
+    public static void ShortScene()
+    {
+        Console.Clear();
+
+        WriteLineColored("The door creaks as you step outside.", ConsoleColor.Gray, 35);
+        Thread.Sleep(400);
+        WriteLineColored("Cold air. The kind that bites.", ConsoleColor.Gray, 35);
+        Thread.Sleep(600);
+        Console.WriteLine();
+
+        WriteLineColored("The village is quiet.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(300);
+        WriteLineColored("Too quiet for midday.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(700);
+        Console.WriteLine();
+
+        WriteLineColored("A child stares at you from a doorway, then disappears inside.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(500);
+        WriteLineColored("An old woman across the street won't meet your eyes.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(600);
+        Console.WriteLine();
+
+        WriteLineColored("You look north.", ConsoleColor.Gray, 30);
+        Thread.Sleep(400);
+        WriteLineColored("The road to Morthal cuts straight through the Forgotten Grove.", ConsoleColor.Gray, 30);
+        Thread.Sleep(300);
+        WriteLineColored("You've heard stories about that forest.", ConsoleColor.Gray, 30);
+        Thread.Sleep(300);
+        WriteLineColored("Everyone has.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored("You fold the letter and put it in your pocket.", ConsoleColor.Gray, 35);
+        Thread.Sleep(400);
+        WriteLineColored("There's nothing left for you here anyway.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored("The grove awaits.", ConsoleColor.DarkGreen, 40);
+        Thread.Sleep(600);
+        Console.WriteLine();
+
+        WriteLineColored("Press any key to enter the Forgotten Grove...", ConsoleColor.White, 20);
+        Console.ReadKey(true);
+    }
 }
