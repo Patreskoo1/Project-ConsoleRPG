@@ -267,4 +267,137 @@ public static class StoryText
         WriteLineColored("Press any key to enter the Forgotten Grove...", ConsoleColor.White, 20);
         Console.ReadKey(true);
     }
+
+    public static void ForgottenGroveIntro()
+    {
+        Console.Clear();
+
+        WriteLineColored("The trees close in behind you the moment you step off the road.", ConsoleColor.DarkGreen, 35);
+        Thread.Sleep(500);
+        WriteLineColored("You didn't notice it happening. They just... did.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(700);
+        Console.WriteLine();
+
+        WriteLineColored("The Forgotten Grove.", ConsoleColor.Green, 50);
+        Thread.Sleep(600);
+        Console.WriteLine();
+
+        WriteLineColored("Mist clings to the roots. The light here is wrong — too pale, too still.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(500);
+        WriteLineColored("Somewhere deep in the trees, something moves.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(400);
+        WriteLineColored("You tell yourself it's the wind.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored("The path to Morthal runs through here.", ConsoleColor.Gray, 35);
+        Thread.Sleep(400);
+        WriteLineColored("Assuming you can find the path.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(900);
+        Console.WriteLine();
+
+        WriteLineColored("You grip the knife from the table.", ConsoleColor.Gray, 35);
+        Thread.Sleep(400);
+        WriteLineColored("It's not much. But it's something.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored("  [1] Move deeper into the grove", ConsoleColor.White, 20);
+        WriteLineColored("  [2] Check your surroundings first", ConsoleColor.White, 20);
+        WriteLineColored("  [3] Look for tracks on the ground", ConsoleColor.White, 20);
+        Console.WriteLine();
+
+        WriteLineColored("What do you do?", ConsoleColor.DarkYellow, 25);
+
+        while (true)
+        {
+            var key = Console.ReadKey(true).KeyChar;
+
+            if (key == '1')
+            {
+                Console.WriteLine();
+                WriteLineColored("You push forward into the mist.", ConsoleColor.DarkGray, 35);
+                Thread.Sleep(500);
+                WriteLineColored("Something growls nearby.", ConsoleColor.DarkRed, 40);
+                Thread.Sleep(600);
+                // -> trigger combat
+                break;
+            }
+            if (key == '2')
+            {
+                Console.WriteLine();
+                WriteLineColored("You scan the treeline. Nothing moves.", ConsoleColor.DarkGray, 35);
+                Thread.Sleep(400);
+                WriteLineColored("But the silence itself feels like a warning.", ConsoleColor.DarkGray, 35);
+                Thread.Sleep(600);
+                WriteLineColored("You spot a broken lantern on the ground. Someone was here recently.", ConsoleColor.Gray, 30);
+                Thread.Sleep(700);
+                // -> small lore detail, potom combat
+                break;
+            }
+            if (key == '3')
+            {
+                Console.WriteLine();
+                WriteLineColored("You crouch down and study the mud.", ConsoleColor.DarkGray, 35);
+                Thread.Sleep(400);
+                WriteLineColored("Bootprints. Fresh ones. And something else alongside them.", ConsoleColor.DarkGray, 35);
+                Thread.Sleep(500);
+                WriteLineColored("Too large for a man. Too deliberate for an animal.", ConsoleColor.Gray, 30);
+                Thread.Sleep(800);
+                // -> small lore detail, potom combat
+                break;
+            }
+        }
+    }
+
+    public static void ForgottenGroveBossInto()
+    {
+        Console.Clear();
+
+        WriteLineColored("You hear it before you see it.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(500);
+        WriteLineColored("Your name.", ConsoleColor.DarkRed, 50);
+        Thread.Sleep(700);
+        WriteLineColored("Spoken softly. From everywhere at once.", ConsoleColor.DarkGray, 35);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored("The mist parts.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(600);
+        Console.WriteLine();
+
+        WriteLineColored("It stands at the heart of the grove.", ConsoleColor.Gray, 30);
+        Thread.Sleep(400);
+        WriteLineColored("Ancient. Massive. Wrong.", ConsoleColor.DarkGray, 45);
+        Thread.Sleep(700);
+        WriteLineColored("Branches twist without wind. Bark darker than it should be.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(500);
+        WriteLineColored("And from somewhere deep within the wood — voices.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(400);
+        WriteLineColored("Names. Dozens of them. All at once.", ConsoleColor.DarkGray, 30);
+        Thread.Sleep(800);
+        Console.WriteLine();
+
+        WriteLineColored($"Then yours again. Clear. Patient.", ConsoleColor.DarkRed, 35);
+        Thread.Sleep(900);
+        Console.WriteLine();
+
+        WriteLineColored("                — WHISPERING END —", ConsoleColor.DarkGreen, 25);
+        Thread.Sleep(400);
+        WriteLineColored("              Ancient of the Forgotten Grove", ConsoleColor.DarkGray, 20);
+        Thread.Sleep(1000);
+        Console.WriteLine();
+
+        WriteLineColored("The branches reach toward you.", ConsoleColor.Gray, 35);
+        Thread.Sleep(500);
+        WriteLineColored("It already knows your name.", ConsoleColor.DarkRed, 40);
+        Thread.Sleep(600);
+        WriteLineColored("It has known it for a long time.", ConsoleColor.DarkGray, 40);
+        Thread.Sleep(900);
+        Console.WriteLine();
+
+        WriteLineColored("Press any key to fight...", ConsoleColor.White, 20);
+        Console.ReadKey(true);
+    }
+    
 }
